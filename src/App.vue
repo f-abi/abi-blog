@@ -14,10 +14,6 @@ export default {
 </script>
 
 <style lang="scss">
-/* font*/
-// * {
-//   font-family: "WenYue";
-// }
 body:before {
   content: " ";
   position: fixed;

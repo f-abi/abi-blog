@@ -7,11 +7,16 @@ import "@/assets/fonts/font.css";
 import icon from "@/components/icon/AbiIcon.vue";
 //cooike设置
 import { isCookie, getCookie } from "@/utility/cookie";
-if (isCookie("u_t")) {
-  store.dispatch("logined", getCookie("u_t"));
+
+async function isAuth() {
+  if (isCookie("u_t")) {
+    await store.dispatch("logined", getCookie("u_t"));
+  }
 }
-createApp(App)
-  .component("AbiIcon", icon)
-  .use(store)
-  .use(router)
-  .mount("#app");
+isAuth().finally(() => {
+  createApp(App)
+    .component("AbiIcon", icon)
+    .use(store)
+    .use(router)
+    .mount("#app");
+});

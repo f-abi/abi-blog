@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Index from "@/views/Index";
+import store from "../store";
 
 const routes = [
   {
@@ -7,15 +8,6 @@ const routes = [
     name: "Index",
     component: Index,
   },
-  // {
-  //   path: "/about",
-  //   name: "About",
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () =>
-  //     import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  // },
   {
     path: "/register",
     name: "Register",
@@ -23,12 +15,18 @@ const routes = [
       import(
         /* webpackChunkName: "register" */ "../views/userAuthPage/Register.vue"
       ),
+    beforeEnter: (to, from, next) => {
+      if (!store.state.isAuth) next();
+    },
   },
   {
     path: "/login",
     name: "Login",
     component: () =>
       import(/* webpackChunkName: "login" */ "../views/userAuthPage/Login.vue"),
+    beforeEnter: (to, from, next) => {
+      if (!store.state.isAuth) next();
+    },
   },
   {
     path: "/management/:option1/:option2",
@@ -37,6 +35,8 @@ const routes = [
       import(
         /* webpackChunkName: "ManagementCenter" */ "../views/ArticleCenter/ManagementCenter.vue"
       ),
+    beforeEnter: (to, from, next) =>
+      store.state.isAuth ? next() : next("/login"),
   },
   {
     path: "/management/Newarticle",
@@ -45,6 +45,8 @@ const routes = [
       import(
         /* webpackChunkName: "NewArticle" */ "../views/ArticleCenter/NewArticle.vue"
       ),
+    beforeEnter: (to, from, next) =>
+      store.state.isAuth ? next() : next("/login"),
   },
   {
     path: "/article/:aid",

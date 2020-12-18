@@ -1,6 +1,12 @@
 <template>
   <div class="tinymce-editor">
-    <editor v-model="articleContent" :init="markdownContent.init" :disabled="disabled" @blur="saveArticleContent"> </editor>
+    <editor
+      v-model="articleContent"
+      :init="markdownContent.init"
+      :disabled="disabled"
+      @blur="saveArticleContent"
+    >
+    </editor>
   </div>
 </template>
 
@@ -41,7 +47,7 @@ export default {
     //网址路径
     baseUrl: {
       type: String,
-      default: "http://192.168.1.6:8080",
+      default: "http://192.168.1.5:8080",
     },
     //是否禁用
     disabled: {
@@ -56,7 +62,8 @@ export default {
     //工具栏配置
     toolbar: {
       type: [String, Array],
-      default: "undo redo | blockquote codesample  link  image table |formatselect| bullist numlist hr bold italic underline strikethrough forecolor backcolor |alignleft aligncenter alignright| removeformat fullscreen",
+      default:
+        "undo redo | blockquote codesample  link  image table |formatselect| bullist numlist hr bold italic underline strikethrough forecolor backcolor |alignleft aligncenter alignright| removeformat fullscreen",
       // default: "undo redo styleselect bold italic alignleft aligncenter alignright alignjustify | bullist numlist outdent indent",
     },
   },

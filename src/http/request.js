@@ -2,7 +2,7 @@ import axios from "axios";
 import store from "@/store";
 import { getCookie, isCookie } from "@/utility/cookie.js";
 const apiV1 = axios.create({
-  baseURL: "http://192.168.1.6:8000/api/v1",
+  baseURL: "http://192.168.1.5:8000/api/v1",
   timeout: 10000,
 });
 // 添加请求拦截器

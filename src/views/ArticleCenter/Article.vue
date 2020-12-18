@@ -11,7 +11,9 @@
                 {{ articleData.created_time.slice(0, 10) }}
               </li>
               <li><AbiIcon>&#xe608;</AbiIcon> {{ articleData.look_num }}</li>
-              <li><AbiIcon>&#xe67a;</AbiIcon> {{ articleData.collection_num }}</li>
+              <li>
+                <AbiIcon>&#xe67a;</AbiIcon> {{ articleData.collection_num }}
+              </li>
               <li><AbiIcon>&#xe617;</AbiIcon>{{ articleData.label_name }}</li>
               <li><AbiIcon>&#xe638;</AbiIcon> 测试测试测试</li>
             </ul>
@@ -60,7 +62,11 @@
         </div>
         <div class="sub-content"><AbiIcon>&#xe75b;</AbiIcon> 发布</div>
       </div>
-      <div class="comment-content" v-for="(index, item) in articleData._comment" :key="item">
+      <div
+        class="comment-content"
+        v-for="(index, item) in articleData._comment"
+        :key="item"
+      >
         <div class="comment-user-img">
           <img :src="index.profile_photo" alt="" />
         </div>
@@ -71,26 +77,50 @@
         <div class="comment-text">{{ index.comment_text }}</div>
         <div class="comment-reply">
           <span class="del"><AbiIcon>&#xe655;</AbiIcon></span
-          ><span class="rep" @click="openReply(item, index.user_name, index.user_id, index.comment_id)"><AbiIcon>&#xe603;</AbiIcon></span>
+          ><span
+            class="rep"
+            @click="
+              openReply(item, index.user_name, index.user_id, index.comment_id)
+            "
+            ><AbiIcon>&#xe603;</AbiIcon></span
+          >
         </div>
-        <div class="reply-content" v-for="(_index, _item) in index.reply" :key="_item">
+        <div
+          class="reply-content"
+          v-for="(_index, _item) in index.reply"
+          :key="_item"
+        >
           <div class="reply-user-img">
             <img :src="_index.profile_photo" alt="" />
           </div>
           <div class="reply-user-info">
             <AbiIcon>&#xe638;</AbiIcon><span>{{ _index.user_name }}</span
-            ><label>回复</label><AbiIcon>&#xe638;</AbiIcon><span>{{ _index.to_user_name }}</span
-            ><br /><AbiIcon>&#xe63a;</AbiIcon><span>{{ _index.created_at }}</span>
+            ><label>回复</label><AbiIcon>&#xe638;</AbiIcon
+            ><span>{{ _index.to_user_name }}</span
+            ><br /><AbiIcon>&#xe63a;</AbiIcon
+            ><span>{{ _index.created_at }}</span>
           </div>
           <div class="reply-text">{{ _index.reply_text }}</div>
           <div class="reply-reply">
             <span class="del"><AbiIcon>&#xe655;</AbiIcon></span
-            ><span class="rep" @click="openReply(item, _index.user_name, _index.reply_from_uid, index.comment_id)"><AbiIcon>&#xe603;</AbiIcon></span>
+            ><span
+              class="rep"
+              @click="
+                openReply(
+                  item,
+                  _index.user_name,
+                  _index.reply_from_uid,
+                  index.comment_id
+                )
+              "
+              ><AbiIcon>&#xe603;</AbiIcon></span
+            >
           </div>
         </div>
         <div class="new-reply" v-show="viewStatus.replyKey == item">
           <div class="tips">
-            回复:<AbiIcon>&#xe638;</AbiIcon><span>{{ viewStatus.replyUName }}</span>
+            回复:<AbiIcon>&#xe638;</AbiIcon
+            ><span>{{ viewStatus.replyUName }}</span>
           </div>
           <div class="content">
             <textarea></textarea>

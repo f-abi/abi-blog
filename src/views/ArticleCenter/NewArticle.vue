@@ -3,7 +3,9 @@
     <div class="new-article-tips">
       <span><AbiIcon>&#xe60f;</AbiIcon> 新建博文</span>
       <div class="new-article-tips-icon">
-        <AbiIcon @click="dataStatus.tipsShow = !dataStatus.tipsShow">&#xe632;</AbiIcon>
+        <AbiIcon @click="dataStatus.tipsShow = !dataStatus.tipsShow"
+          >&#xe632;</AbiIcon
+        >
       </div>
     </div>
     <hr class="new-article-tips-hr" />
@@ -11,12 +13,24 @@
       <div class="new-article-info">
         <div class="new-article-info-tips">
           <AbiIcon>&#xe62b;</AbiIcon> 文章标题:
-          <input type="text" v-model="articleData.title" @blur="articleTitleCheck" @focus="dataStatus.titleError = false" :class="dataStatus.titleError ? 'newArticleInputErr' : ''" />
+          <input
+            type="text"
+            v-model="articleData.title"
+            @blur="articleTitleCheck"
+            @focus="dataStatus.titleError = false"
+            :class="dataStatus.titleError ? 'newArticleInputErr' : ''"
+          />
         </div>
         <div class="new-article-info-title">
           <AbiIcon>&#xe617;</AbiIcon>
           文章标签:
-          <input type="text" v-model="articleData.label" @blur="articleLabelCheck" @focus="dataStatus.labelError = false" :class="dataStatus.labelError ? 'newArticleInputErr' : ''" />
+          <input
+            type="text"
+            v-model="articleData.label"
+            @blur="articleLabelCheck"
+            @focus="dataStatus.labelError = false"
+            :class="dataStatus.labelError ? 'newArticleInputErr' : ''"
+          />
         </div>
         <div class="new-article-cover-tips">
           <AbiIcon>&#xe64a;</AbiIcon>
@@ -28,7 +42,13 @@
       </div>
     </div>
     <div class="new-article-markdown">
-      <Markdown :articleContent="articleData.content" :setArticleContent="setContent" :saveArticleContent="saveArticle" :setImgCacheName="setImgCacheName" :height="500" />
+      <Markdown
+        :articleContent="articleData.content"
+        :setArticleContent="setContent"
+        :saveArticleContent="saveArticle"
+        :setImgCacheName="setImgCacheName"
+        :height="500"
+      />
     </div>
     <div class="new-article-choice">
       <div class="new-article-submit" @click="subArticle">
@@ -41,7 +61,10 @@
         保存草稿
       </div>
     </div>
-    <div class="new-article-lighting" :class="dataStatus.tipsShow ? 'new-article-lighting-show' : ''">
+    <div
+      class="new-article-lighting"
+      :class="dataStatus.tipsShow ? 'new-article-lighting-show' : ''"
+    >
       <div class="new-article-lighting-back"></div>
       <div class="new-article-lighting-tips">
         <div class="new-article-lighting-tips-title">
@@ -54,7 +77,9 @@
             <li><span>· </span>文章标题支持2~100个字符.</li>
             <li><span>· </span>文章标签支持2~20个字符.</li>
             <li><span>· </span>文章标签仅能唯一，输入后系统会自动匹配 .</li>
-            <li><span>· </span>封面仅支持['jpg','png','jpeg','gif']格式图片.</li>
+            <li>
+              <span>· </span>封面仅支持['jpg','png','jpeg','gif']格式图片.
+            </li>
             <li><span>· </span>封面比例为16:9上传时选择范围剪切上传.</li>
             <li><span>· </span>文章内容图片上传后,过期时间为10天.</li>
             <li><span>· </span>图片过期后,会提示重新上传.</li>
@@ -64,7 +89,12 @@
             <li><span>· </span></li>
           </ul>
         </div>
-        <div class="new-article-lighting-tips-determine" @click="dataStatus.tipsShow = !dataStatus.tipsShow">确定</div>
+        <div
+          class="new-article-lighting-tips-determine"
+          @click="dataStatus.tipsShow = !dataStatus.tipsShow"
+        >
+          确定
+        </div>
       </div>
     </div>
   </div>
@@ -73,7 +103,11 @@
 <script>
 import Markdown from "@/components/markdown/Markdown";
 import ImgUpload from "@/components/imgupload/ImgUpload";
-import { saveArticleAPI, getSaveArticleAPI, subreviewarticleAPI } from "@/http/v1/apiV1";
+import {
+  saveArticleAPI,
+  getSaveArticleAPI,
+  subreviewarticleAPI,
+} from "@/http/v1/apiV1";
 import { ref, reactive } from "vue";
 import { useStore } from "vuex";
 export default {
@@ -120,8 +154,18 @@ export default {
         },
       });
     };
-    let { setCoverImg, setContent, setImgCacheName } = setData(dataStatus, articleData, store, saveArticle);
-    let { preservation, articleTitleCheck, articleLabelCheck, subArticle } = checkDataAndSub(dataStatus, articleData, store, saveArticle);
+    let { setCoverImg, setContent, setImgCacheName } = setData(
+      dataStatus,
+      articleData,
+      store,
+      saveArticle
+    );
+    let {
+      preservation,
+      articleTitleCheck,
+      articleLabelCheck,
+      subArticle,
+    } = checkDataAndSub(dataStatus, articleData, store, saveArticle);
     return {
       articleData,
       setCoverImg,
@@ -187,7 +231,11 @@ function checkDataAndSub(dataStatus, articleData, store, saveArticle) {
   };
   //文章标题校验
   const articleTitleCheck = () => {
-    if (articleData.title == null || articleData.title.length < 2 || articleData.title.length > 100) {
+    if (
+      articleData.title == null ||
+      articleData.title.length < 2 ||
+      articleData.title.length > 100
+    ) {
       store.commit("openTips", {
         icon: "&#xe62b;",
         title: "标题错误",
@@ -200,10 +248,14 @@ function checkDataAndSub(dataStatus, articleData, store, saveArticle) {
   };
   //文章标签校验
   const articleLabelCheck = () => {
-    if (articleData.label == null || articleData.label.length < 2 || articleData.label.length > 20) {
+    if (
+      articleData.label == null ||
+      articleData.label.length < 2 ||
+      articleData.label.length > 20
+    ) {
       store.commit("openTips", {
         icon: "&#xe617;",
-        title: "标题错误",
+        title: "标签错误",
         text: "文章标签仅支持2~20个字符!",
       });
       return (dataStatus.labelError = true);
@@ -213,7 +265,11 @@ function checkDataAndSub(dataStatus, articleData, store, saveArticle) {
   };
   //提交文章待审核
   const subArticle = () => {
-    if (articleData.title == null || articleData.title.length < 2 || articleData.title.length > 100) {
+    if (
+      articleData.title == null ||
+      articleData.title.length < 2 ||
+      articleData.title.length > 100
+    ) {
       store.commit("openTips", {
         icon: "&#xe62b;",
         title: "标题错误",
@@ -221,7 +277,11 @@ function checkDataAndSub(dataStatus, articleData, store, saveArticle) {
       });
       return (dataStatus.titleError = true);
     }
-    if (articleData.label == null || articleData.label.length < 2 || articleData.label.length > 20) {
+    if (
+      articleData.label == null ||
+      articleData.label.length < 2 ||
+      articleData.label.length > 20
+    ) {
       store.commit("openTips", {
         icon: "&#xe617;",
         title: "标题错误",
@@ -366,7 +426,6 @@ function checkDataAndSub(dataStatus, articleData, store, saveArticle) {
     }
   }
   .new-article-choice {
-    // width: 70vw;
     margin: 0 auto;
     padding: 20px 20px 30px 20px;
     .new-article-submit {
@@ -376,7 +435,7 @@ function checkDataAndSub(dataStatus, articleData, store, saveArticle) {
       font-size: 16px;
       text-align: center;
       color: $subfontcolorOne;
-      width: 270px;
+      width: 220px;
       height: 35px;
       border: 2px solid $subcolorTwo;
       border-radius: 10px;
@@ -393,7 +452,7 @@ function checkDataAndSub(dataStatus, articleData, store, saveArticle) {
       font-size: 16px;
       text-align: center;
       color: $subfontcolorOne;
-      width: 270px;
+      width: 220px;
       height: 35px;
       border: 2px solid $subcolorTwo;
       border-radius: 10px;

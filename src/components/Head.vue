@@ -28,8 +28,25 @@
           搜索
         </li>
         <li class="nav-users">
-          <span class="user-img" @click="gotoRouter('login')"><img :src="store.state.userProfile ? store.state.userProfile : require('@/assets/img/defaultProfile.jpg')" alt="" /></span>
-          <span class="users-name" @click="gotoRouter('login')"> {{ store.state.userName ? " " + store.state.userName : " 未登录" }}</span>
+          <span
+            class="user-img"
+            @click="gotoRouter('management/personal_center/user_info')"
+            ><img
+              :src="
+                store.state.userProfile
+                  ? store.state.userProfile
+                  : require('@/assets/img/defaultProfile.jpg')
+              "
+              alt=""
+          /></span>
+          <span
+            class="users-name"
+            @click="gotoRouter('management/personal_center/user_info')"
+          >
+            {{
+              store.state.userName ? " " + store.state.userName : " 未登录"
+            }}</span
+          >
           <div class="tips" :class="{ isNoShow: store.state.isAuth }">
             <div class="tips-title">登陆后你可以:</div>
             <hr />
@@ -56,7 +73,9 @@
             </div>
           </div>
           <div class="user-tips" :class="{ isNoShow: !store.state.isAuth }">
-            <div class="user-tips-useremail">Email:{{ store.state.userEmail }}</div>
+            <div class="user-tips-useremail">
+              Email:{{ store.state.userEmail }}
+            </div>
             <ul class="user-tips-relationship">
               <li>
                 <span>关注</span>
@@ -139,7 +158,12 @@ export default {
   },
   setup() {
     const store = useStore();
-    let { isActive, changeActive, isSearch, changeSearchActive } = changeClass();
+    let {
+      isActive,
+      changeActive,
+      isSearch,
+      changeSearchActive,
+    } = changeClass();
     let { gotoRouter } = jumpRouter();
     //退出
     const logout = () => {

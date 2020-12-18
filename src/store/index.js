@@ -18,6 +18,7 @@ export default createStore({
     //
     isSubLoad: false,
     subLoadTips: null,
+    //
     tips: {
       istips: false,
       icon: null,
@@ -69,18 +70,22 @@ export default createStore({
       state.subLoadTips = null;
     },
     openTips(state, data) {
-      state.tips.istips = true;
-      state.tips.icon = data.icon;
-      state.tips.title = data.title;
-      state.tips.text = data.text;
-      setTimeout(() => {
-        state.tips.istips = false;
+      if (!state.tips.istips && state.tips.icon == null) {
+        console.log("111111111");
+        console.log(data);
+        state.tips.istips = true;
+        state.tips.icon = data.icon;
+        state.tips.title = data.title;
+        state.tips.text = data.text;
         setTimeout(() => {
-          state.tips.icon = null;
-          state.tips.title = null;
-          state.tips.text = null;
-        }, 400);
-      }, 2500);
+          state.tips.istips = false;
+          setTimeout(() => {
+            state.tips.icon = null;
+            state.tips.title = null;
+            state.tips.text = null;
+          }, 400);
+        }, 2500);
+      }
     },
     cancelTips(state) {
       state.tips.istips = false;
